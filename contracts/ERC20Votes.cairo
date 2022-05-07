@@ -39,6 +39,8 @@ from library.votable import(
     Votable_moveVotingPower,
     Votable_writeCheckpointTotalsupply,
     Votable_getLastTotalSupplyPos,
+    Votable_afterTransferFrom,
+    Votable_afterTransfer,
 )
 
 @constructor
@@ -196,12 +198,13 @@ func transfer{
         range_check_ptr
     }(recipient: felt, amount: Uint256) -> (success: felt):
     ERC20_transfer(recipient, amount)
+    Votable_afterTransfer(recipient,amount)
     return (TRUE)
 end
 
 @external
 func transferFrom{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*, ERC20_mint
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(
@@ -210,6 +213,7 @@ func transferFrom{
         amount: Uint256
     ) -> (success: felt):
     ERC20_transferFrom(sender, recipient, amount)
+    Votable_afterTransferFrom(sender, recipient, amount)
     return (TRUE)
 end
 
