@@ -204,7 +204,7 @@ end
 
 @external
 func transferFrom{
-        syscall_ptr : felt*, ERC20_mint
+        syscall_ptr : felt*, 
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(

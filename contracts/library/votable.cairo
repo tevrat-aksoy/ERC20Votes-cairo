@@ -147,11 +147,13 @@ func Votable_afterTransfer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, ran
     recipient:felt,amount:Uint256):
     let (caller)=get_caller_address()
     Votable_moveVotingPower(caller,recipient,amount)
+    return()
 end
 
 func Votable_afterTransferFrom{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     sender:felt,recipient:felt,amount:Uint256):
     Votable_moveVotingPower(sender,recipient,amount)
+    return()
 end
 
 func Votable_moveVotingPower{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
